@@ -1,0 +1,104 @@
+package br.ce.wcaquino.servicos;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
+public class CalculadoraMockTest {
+	
+	@Mock
+	private Calculadora calcMock;
+	
+	@Spy
+	private Calculadora calcSpy;
+	
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+		
+	}
+	
+	@Test
+	public void deveMostraDiferencaEntreMockSpy() {
+		/*
+		 * O comportamento padrão de um mock é: se for informado a ele o que retornar em uma determinada condição, ele irá retornar aquele valor. Se forem passados valores não previstos ele irá retornar o valor default do tipo retornado.
+		 * Por exemplo: null para objetos, 0 para int, 0.0 para double e assim sucessivamente. O exemplo abaixo irá imprimir 0 (zero) porque dissemos que quando o método somar for chamado passando os valores 1 e 2, deve ser retornado o
+		 * valor 8. Porém, a chamada feita dentro do método System.out.println passou os valores 1 e 5. Como o mock não previu tais valores, foi retornado o valor default do tipo retornado por somar. Como se trata de um int, o valor
+		 * retornado foi 0.
+		 */
+		when(calcMock.somar(1, 2)).thenReturn(8);
+		System.out.println("Mock retornou o valor " + calcMock.somar(1, 5));
+		
+		/*
+		 * No caso do Spy, se for feita uma execução não prevista, ele irá efetivamente fazer a chamada ao método definido no teste e retornará esse valor.
+		 * No exemplo abaixo será impresso o valor 6 já que não foi prevista a chamada ao método somar passando os argumentos 1 e 5.
+		 * 
+		 * Observação: por esse motivo Spy não funciona com interfaces, apenas com classes concretas.
+		 */
+		when(calcSpy.somar(1, 2)).thenReturn(8);
+		System.out.println("Spy retornou o valor " + calcSpy.somar(1, 5));
+		
+		/*
+		 * Quando o método a ser testado tem tipo de retorno void os comportamentos são os seguintes:
+		 * Mock: não executa o método. A execução só acontece com métodos que têm retorno e, no caso de condição não prevista, retorna o valor default do tipo retornado.
+		 * Spy: executa o método normalmente.
+		 * Os exemplos abaixo mostram que nada é impresso após a chamada calcMock.imprime() ao passo que após a chamada calcSpy.imprime() vemos a impressão feita pelo método imprime.
+		 */
+		System.out.println("Mock:\n");
+		calcMock.imprime();
+		System.out.println("Spy:\n");
+		calcSpy.imprime();
+		
+		/*
+		 * Para anular o comportamento padrão do Spy que é de executar o método quando a condição não é prevista, podemos usar o método doNothing de Mockito.
+		 * No exemplo abaixo não será impresso após a mensagem 'Spy após doNothing:'.
+		 */
+		doNothing().when(calcSpy).imprime();
+		System.out.println("Spy após doNothing:\n");
+		calcSpy.imprime();
+		
+		when(calcMock.somar(1, 2)).thenReturn(8);
+		doReturn(8).when(calcMock.somar(1, 2));
+		
+	}
+	
+	@Test
+	public void deveMostraDiferencaEntreMockSpy2() {
+		
+		when(calcMock.somar(1, 2)).thenReturn(8);
+		when(calcMock.somar(1, 2)).thenReturn(8);
+//		doReturn(5).when(calcMock).somar(1, 2);
+//		doReturn(5).when(calcSpy).somar(1, 2);
+		
+		System.out.println("Mock retornou o valor " + calcMock.somar(1, 5));
+		System.out.println("Spy retornou o valor " + calcSpy.somar(1, 5));
+		
+		System.out.println("Mock:\n");
+		calcMock.imprime();
+		System.out.println("Spy:\n");
+		calcSpy.imprime();
+		
+	}
+
+	@Test
+	public void teste() {
+		Calculadora calc = Mockito.mock(Calculadora.class);
+		
+		ArgumentCaptor<Integer> argCapt = ArgumentCaptor.forClass(Integer.class);
+		when(calc.somar(argCapt.capture(), argCapt.capture())).thenReturn(5);
+		
+		assertEquals(5, calc.somar(1, 10000));
+
+		// Para exibir todos os valores capturados.
+		System.out.println(argCapt.getAllValues());
+	}
+}

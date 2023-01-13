@@ -1,0 +1,10 @@
+INDEX VERSION 1.131+C:\Users\renato.veneroso\Particular\curso_testes_unitarios\.metadata\.plugins\org.eclipse.jdt.core
+2894020035.index
+1811976574.index
+2144040246.index
+1865797976.index
+1906727298.index
+1310431374.index
+593964985.index
+2033182667.index
+3924229942.index

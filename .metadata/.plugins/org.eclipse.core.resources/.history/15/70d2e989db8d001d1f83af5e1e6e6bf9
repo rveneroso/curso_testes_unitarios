@@ -1,0 +1,51 @@
+package br.ce.wcaquino.servicos;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
+public class CalculadoraMockTest {
+	
+	@Mock
+	private Calculadora calcMock;
+	
+	@Spy
+	private Calculadora calcSpy;
+	
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+		
+	}
+	
+	@Test
+	public void deveMostraDiferencaEntreMockSpy() {
+		/*
+		 * O comportamento padrão de um mock é: se for informado a ele o que retornar em uma determinada condição, ele irá retornar aquele valor. Se forem passados valores não previstos ele irá retornar o valor default do tipo retornado.
+		 * Por exemplo: null para objetos, 0 para int, 0.0 para double e assim sucessivamente. O exemplo abaixo irá imprimir 0 (zero).
+		 */
+		when(calcMock.somar(1, 2)).thenReturn(8);
+		System.out.println("Mock retornou o valor " + calcMock.somar(1, 5));
+		
+	}
+
+	@Test
+	public void teste() {
+		Calculadora calc = Mockito.mock(Calculadora.class);
+		
+		ArgumentCaptor<Integer> argCapt = ArgumentCaptor.forClass(Integer.class);
+		when(calc.somar(argCapt.capture(), argCapt.capture())).thenReturn(5);
+		
+		assertEquals(5, calc.somar(1, 10000));
+
+		// Para exibir todos os valores capturados.
+		System.out.println(argCapt.getAllValues());
+	}
+}
