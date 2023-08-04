@@ -35,7 +35,7 @@ public class LocacaoServiceTest {
 		Locacao locacao = servico.alugarFilme(usuario, filme);
 		
 		// Verifiçação
-		// Usando assertThat e fazendo import estáticos das classes.
+		// Usando checkThat e fazendo import estático das classes.
 		error.checkThat(locacao.getValor(), CoreMatchers.is(7.0)); // Pode ser lido como 'verifique que locacao.getValor() é 5.0'
 		// Mesmo teste acima escrito de outra forma
 		error.checkThat(locacao.getValor(), CoreMatchers.is(CoreMatchers.equalTo(5.0))); 

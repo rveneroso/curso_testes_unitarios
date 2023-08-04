@@ -56,7 +56,7 @@ public class LocacaoServiceTest {
 	
 	/*
 	 * Existem também as anotações @BeforeClass e @AfterClass que definem métodos a serem executados antes e depois da instanciação da classe. Esses métodos devem ser estáticos. Caso
-	 * Contrário o JUnit não terá acesso a eles.
+	 * contrário o JUnit não terá acesso a eles e uma exceção será levantada ao se executar a classe de testes.
 	 */
 	@BeforeClass
 	public static void beforeClassMethod() {

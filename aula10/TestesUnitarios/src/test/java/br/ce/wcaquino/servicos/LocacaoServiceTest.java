@@ -32,7 +32,7 @@ public class LocacaoServiceTest {
 	
 	/**
 	 * Quando se adiciona a cláusula throws a um método de testes gerenciado pelo JUnit, é o próprio JUnit que vai tratar a exceção.
-	 * Aqui temos o caso de um filme sem estoque. Como o métofdo alugarFilme irá lançar a exceção, os testes irão falhar. Porém, em vez de reportar o problema como uma falha, o JUnit irá reportá-lo como um erro.
+	 * Aqui temos o caso de um filme sem estoque. Como o método alugarFilme irá lançar a exceção, os testes irão falhar. Porém, em vez de reportar o problema como uma falha, o JUnit irá reportá-lo como um erro.
 	 * Isso pode ser visto na console do JUnit.
 	 */
 	@Test
@@ -47,7 +47,7 @@ public class LocacaoServiceTest {
 		Locacao locacao = servico.alugarFilme(usuario, filme);
 		
 		// Verifiçação
-		// Usando assertThat e fazendo import estáticos das classes.
+		// Usando checkThat e fazendo import estático das classes.
 		error.checkThat(locacao.getValor(), CoreMatchers.is(5.0)); // Pode ser lido como 'verifique que locacao.getValor() é 5.0'
 		// Mesmo teste acima escrito de outra forma
 		error.checkThat(locacao.getValor(), CoreMatchers.is(CoreMatchers.equalTo(5.0))); 
@@ -118,8 +118,5 @@ public class LocacaoServiceTest {
 		
 		// Ação
 		servico.alugarFilme(usuario, filme);
-		
-
 	}
-
 }
