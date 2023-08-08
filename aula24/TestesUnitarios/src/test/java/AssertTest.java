@@ -5,12 +5,15 @@ import br.ce.wcaquino.entidades.Usuario;
 
 public class AssertTest {
 
+	int valorEsperado = 1;
+	int valorObtido = 1;
+
 	@Test
 	public void test(){
 		Assert.assertTrue(true);
 		Assert.assertFalse(false);
 		
-		Assert.assertEquals("Erro de comparacao", 1, 1);
+		Assert.assertEquals("Erro de comparacao", valorEsperado, valorObtido);
 		Assert.assertEquals(0.51234, 0.512, 0.001);
 		Assert.assertEquals(Math.PI, 3.14, 0.01);
 		

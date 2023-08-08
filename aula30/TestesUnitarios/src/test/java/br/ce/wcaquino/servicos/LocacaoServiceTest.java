@@ -14,11 +14,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -182,7 +178,7 @@ public class LocacaoServiceTest {
 		// O usuario2 não está com a alocação em atraso. Portanto ele não deverá ser notificado.
 		verify(emailService, never()).notificarAtraso(usuario2);
 		// Indica que haverá 2 notificações para o usuario3. 
-		// verify(emailService, Mockito.times(2)).notificarAtraso(usuario3);
+		verify(emailService, Mockito.times(2)).notificarAtraso(usuario3);
 		// Indica que é esperado que usuario3 receba pelo menos um email. Se receber mais de um não haverá problema.
 		verify(emailService, atLeastOnce()).notificarAtraso(usuario3);
 		// Testa que não houve nenhuma outra notificação de atraso além de usuario e usuario3

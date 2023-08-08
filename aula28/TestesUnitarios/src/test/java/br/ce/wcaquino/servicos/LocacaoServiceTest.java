@@ -140,7 +140,7 @@ public class LocacaoServiceTest {
 		Usuario usuario = umUusario().agora();
 		List<Filme> filmes = Arrays.asList(umFilme().agora());
 		
-		// Força que ao se chamar o método possuiNegativacao() do objeto mockado for chamado, o valor retornado seja true.
+		// Força que, ao se chamar o método possuiNegativacao() do objeto mockado, o valor retornado seja true.
 		Mockito.when(spcService.possuiNegativacao(usuario)).thenReturn(true);
 		
 		exception.expect(LocadoraException.class);
