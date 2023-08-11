@@ -32,7 +32,7 @@ public class CalculadoraMockTest {
 		/*
 		 * O comportamento padrão de um mock é: se for informado a ele o que retornar em uma determinada condição, ele irá retornar aquele valor. Se forem passados valores não previstos ele irá retornar o valor default do tipo retornado.
 		 * Por exemplo: null para objetos, 0 para int, 0.0 para double e assim sucessivamente. O exemplo abaixo irá imprimir 0 (zero) porque dissemos que quando o método somar for chamado passando os valores 1 e 2, deve ser retornado o
-		 * valor 8. Porém, a chamada feita dentro do método System.out.println passou os valores 1 e 5. Como o mock não previu tais valores, foi retornado o valor default do tipo retornado por somar. Como se trata de um int, o valor
+		 * valor 8. Porém, a chamada feita dentro do método System.out.println passando os valores 1 e 5. Como o mock não previu tais valores, foi retornado o valor default do tipo retornado por somar. Como se trata de um int, o valor
 		 * retornado foi 0.
 		 */
 		when(calcMock.somar(1, 2)).thenReturn(8);
